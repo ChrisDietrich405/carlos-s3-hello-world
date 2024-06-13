@@ -1,9 +1,22 @@
-version: 0.0
+version: 0.2
+
 phases:
   install:
     commands:
-      - echo "No installation steps required for this simple HTML project"  # Optional informative message
+      - echo "Installing dependencies (if any)..."
+  pre_build:
+    commands:
+      - echo "Running pre-build steps..."
   build:
     commands:
-      - cp index.html $CODEBUILD_OUTPUT_DIR/  # Copy HTML file
-      - cp profile-pic.jpg $CODEBUILD_OUTPUT_DIR/  # Copy image file (assuming it exists)
+      - echo "Building the application..."
+      - cp index.html $CODEBUILD_OUTPUT_DIR/
+      - cp profile-pic.jpg $CODEBUILD_OUTPUT_DIR/
+  post_build:
+    commands:
+      - echo "Build complete."
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: $CODEBUILD_OUTPUT_DIR
